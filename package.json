@@ -1,0 +1,28 @@
+{
+  "name": "quick-dijkstra",
+  "version": "1.0.0",
+  "description": "Dijkstra Shortest Path Calculator implemented as a nodejs native module",
+  "main": "quickdijkstra.js",
+  "typings": "quickdijkstra.d.ts",
+  "private": true,
+  "gypfile": true,
+  "scripts": {
+    "test": "jest --runInBand",
+    "speedtest": "node test/speedtest.js",
+    "jsdoc": "jsdoc2md --template README.hbs --files ./quickdijkstra.js >README.md",
+    "tsdoc": "npx typedoc --plugin typedoc-plugin-markdown"
+  },
+  "dependencies": {
+    "bindings": "~1.2.1",
+    "json-beautify": "^1.1.1",
+    "node-addon-api": "^1.0.0"
+  },
+  "devDependencies": {
+    "jest": "^25.2.7",
+    "js-graph-algorithms": "^1.0.18",
+    "jsdoc-to-markdown": "^5.0.3",
+    "typedoc": "^0.20.19",
+    "typedoc-plugin-markdown": "^3.4.5",
+    "typescript": "^4.1.3"
+  }
+}
