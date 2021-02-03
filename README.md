@@ -92,7 +92,7 @@ QuickDijkstraWasm.calculateShortestPaths([ [2,3,1], [0,2,3], [2,1,4] ], ret =>
 
 ```
 
-See the complete [example] (examples/index.html) at examples/index.html
+See the complete [example](examples/index.html) at examples/index.html
 
 ## Api documentation
 
