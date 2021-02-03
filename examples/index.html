@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>quick-dijkstra webassembly example</title>
+		<script>
+			window.onload = function () {
+    			var old = console.log;
+    			var logger = document.getElementById('log');
+    			console.log = function () {
+      				for (var i = 0; i < arguments.length; i++) {
+        				if (typeof arguments[i] == 'object') {
+            				logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + '<br />';
+        				} else {
+            			logger.innerHTML += arguments[i] + '<br />';
+        				}
+      				}
+    			}
+			};
+		</script>
+		<script src="dijkstraengine.js"></script>
+		<script src="quickdijkstra-wasm.js"></script>
+		<script src="testhelper.js"></script>
+		<script>
+
+			
+			function runQuickDijkstra(data) 
+				{
+				var NUM_ITERATIONS = 10;
+				
+				console.log("Speed test of QuickDijkstra");
+				console.log("Running QuickDijkstraWasm " + NUM_ITERATIONS +" times on a topology of 512 nodes");
+
+				let recurseWasm = function(index, callback) 
+					{
+					QuickDijkstraWasm.calculateShortestPaths(data, ret => 
+						{
+						console.log(".");	
+						//console.log(JSON.stringify(ret)); 
+		
+						if (index < NUM_ITERATIONS)
+							return recurseWasm(index+1, callback);
+						else
+							return callback();
+						});		
+					};
+
+				let quickDijkstraWasmStart = Date.now();	
+				recurseWasm(0, ()=> 
+					{
+					let quickDijkstraWasmEnd = Date.now();	
+					let quickDijkstraWasmDuration = quickDijkstraWasmEnd - quickDijkstraWasmStart;
+					console.log("On the average, running QuickDijkstraWasm once on a toology of 512 nodes took: " + (quickDijkstraWasmDuration/NUM_ITERATIONS) +" ms");
+					});
+				}
+
+			var xmlhttp = new XMLHttpRequest();
+			var url = "512topology.json";
+
+			xmlhttp.onreadystatechange = function() 
+				{
+				if (this.readyState == 4 && this.status == 200) 
+					{
+        			var data = TestHelper.convertTopology(this.responseText);
+        			runQuickDijkstra(data);
+    				}
+				};
+			xmlhttp.open("GET", url, true);
+			xmlhttp.send();
+			
+		</script>
+	</head>
+	<body>
+		<pre id="log" style="white-space: pre-wrap;"></pre>
+  	</body>
+</html>

@@ -10,7 +10,9 @@
     "test": "jest --runInBand",
     "speedtest": "node test/speedtest.js",
     "jsdoc": "jsdoc2md --template README.hbs --files ./quickdijkstra.js >README.md",
-    "tsdoc": "npx typedoc --plugin typedoc-plugin-markdown"
+    "tsdoc": "npx typedoc --plugin typedoc-plugin-markdown",
+    "webassembly-compile": "./webassembly-compile.sh",
+    "webassembly-speedtest": "node test/wasmspeedtest.js" 
   },
   "dependencies": {
     "bindings": "~1.2.1",

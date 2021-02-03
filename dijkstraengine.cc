@@ -1,6 +1,13 @@
 #include "dijkstraengine.h"
 #include <set>
 
+#ifdef __EMSCRIPTEN__
+
+#include "emscripten/bind.h"
+using namespace emscripten;
+
+#endif
+
 bool operator < (const Edge &a, const Edge &b)
 	{
     return a.to < b.to;
@@ -224,3 +231,24 @@ int DijkstraEngine::getMaximumPathHops()
 void DijkstraEngine::destroy()
 	{
 	}
+
+#ifdef __EMSCRIPTEN__
+
+EMSCRIPTEN_BINDINGS (c) {
+  class_<DijkstraEngine>("DijkstraEngine")
+    .constructor<>()
+    .function("init", &DijkstraEngine::init)
+    .function("addEdge", &DijkstraEngine::addEdge)
+	.function("compute", &DijkstraEngine::compute)
+	.function("getDistance", &DijkstraEngine::getDistance)
+ 	.function("getParent", &DijkstraEngine::getParent)
+	.function("getPath", &DijkstraEngine::getPath)
+	.function("getPathHops", &DijkstraEngine::getPathHops)
+	.function("getMaximumDistance", &DijkstraEngine::getMaximumDistance)
+	.function("getAverageDistance", &DijkstraEngine::getAverageDistance)
+	.function("getMaximumPathHops", &DijkstraEngine::getMaximumPathHops)
+	.function("destroy", &DijkstraEngine::destroy);
+	
+}
+
+#endif

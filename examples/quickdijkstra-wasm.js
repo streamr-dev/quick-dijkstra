@@ -1,0 +1,1 @@
+../quickdijkstra-wasm.js
