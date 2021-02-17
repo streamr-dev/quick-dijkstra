@@ -1,0 +1,16 @@
+{
+  "name": "quick-dijkstra-wasm-javascript-web-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cp ./src/*.html ./www && cd www && ln -sf ../../../../test/testhelper.js . && ln -sf ../../../../test/512topology.json . && ln -sf ../node_modules/@streamr/quick-dijkstra-wasm/dijkstraengine.js . && ln -sf ../node_modules/@streamr/quick-dijkstra-wasm/dijkstraengine.wasm . && ln -sf ../node_modules/@streamr/quick-dijkstra-wasm/quickdijkstra-wasm.js .",
+    "serve": "cd www && python -m SimpleHTTPServer 8001"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@streamr/quick-dijkstra-wasm": "latest"
+  }
+}

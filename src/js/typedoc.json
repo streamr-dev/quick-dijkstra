@@ -1,0 +1,10 @@
+{
+	"exclude": [
+        "**/test/**/*",
+        "**/wasmdist/**",
+        "**/examples/**",
+        "**/node_modules/**"
+    ],
+	"entryPoints": ["./quickdijkstra.d.ts"],
+	"out": "doc"
+  }

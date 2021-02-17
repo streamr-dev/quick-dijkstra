@@ -1,10 +1,10 @@
-const QuickDijkstra = require("../quickdijkstra.js");
-const JsGraphDijkstra = require("./jsgraphdijkstra");
-const TestHelper = require("./testhelper");
+const QuickDijkstra = require("../../src/js/quickdijkstra.js");
+const JsGraphDijkstra = require("../../test/jsgraphdijkstra");
+const TestHelper = require("../../test/testhelper");
 
 const NUM_ITERATIONS = 10;
 
-const data = TestHelper.loadTopology("./test/512topology.json");
+const data = TestHelper.loadTopology("../../test/512topology.json");
 
 console.log("Speed test of QuickDijkstra");
 console.log("Running QuickDijkstra " + NUM_ITERATIONS +" times on a topology of 512 nodes");

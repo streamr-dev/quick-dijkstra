@@ -1,0 +1,15 @@
+{
+  "name": "quick-dijkstra-wasm-speedtest",
+  "version": "1.0.0",
+  "description": "Speed test of quick-dijkstra-wasm",
+  "main": "wasmspeedtest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node wasmspeedtest.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@streamr/quick-dijkstra-wasm": "latest"
+  }
+}

@@ -1,4 +1,0 @@
-{
-	"entryPoints": ["quickdijkstra.d.ts"],
-	"out": "doc"
-  }

@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+	  "module": "commonjs",	
+	  "esModuleInterop": true,
+	  "target": "ES2015",
+	  "moduleResolution": "node",
+	  "sourceMap": true,
+	  "outDir": "www",
+	  "downlevelIteration": true
+	},
+	"lib": ["es2015"],
+	"files": ["src/example.ts"]
+  }

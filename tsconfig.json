@@ -7,5 +7,10 @@
 	  "sourceMap": true,
 	  "outDir": "dist"
 	},
-	"lib": ["es2015"]
+	"lib": ["es2015"],
+	"files": [
+		"src/js/quickdijkstra.d.ts",
+		"src/wasmjs/quickdijkstra-wasm.d.ts"
+	],
+	"exclude": ["node_modules"]
   }

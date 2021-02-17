@@ -42,16 +42,33 @@ var getLongestShortestPath = function(calculator, pathHops)
 
 QuickDijkstraWasm.calculateShortestPaths = function(links, callback)
 	{
-	//console.log("QuickDijkstra::calculateShortestPaths");
+	var addon = null;	
 	
-	var addon = null;
-	
-	if (typeof module !== 'undefined')
+	// webpack	
+	if (typeof require !== "undefined" && typeof require.ensure === "function")
+		{
+		require.ensure(['./dijkstraengine.js'], function (require) 
+			{ 
+			addon = require('./dijkstraengine.js').Module;	
+			doCalculateShortestPaths(addon, links, callback); 	
+			});
+		}	
+
+	// nodejs
+	else if (typeof module !== 'undefined')
+		{
 		addon = require('./dijkstraengine.js');
-	else if (Module)
-		addon = Module;
-		
-	
+		}
+
+	// script tag	
+	else
+		{
+		addon = window.module;	
+		}	
+	};
+
+var doCalculateShortestPaths = function(addon, links, callback)
+	{	
 	addon.addOnPostRun(() => 
 		{
 		var numNodes = 0;
@@ -117,7 +134,7 @@ QuickDijkstraWasm.calculateShortestPaths = function(links, callback)
 		ret.longestShortestPath = getLongestShortestPath(calculator, pathHops);
 
 		calculator.delete();
-		callback(ret);
+		callback(ret); 
 		});
 	};
 

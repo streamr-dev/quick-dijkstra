@@ -1,0 +1,28 @@
+{
+  "name": "@streamr/quick-dijkstra-wasm-example",
+  "version": "1.0.0",
+  "description": "Example of using @streamr/quick-dijkstra-wasm in typescript",
+  "main": "example.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cp ./node_modules/@streamr/quick-dijkstra-wasm/dijkstraengine.wasm ./www && cp ./src/*.html ./www && cp ./src/*.json ./www && webpack",
+    "serve": "cd www && python -m SimpleHTTPServer 8000"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@streamr/quick-dijkstra-wasm": "latest",
+    "console-browserify": "^1.2.0",
+    "exports-loader": "^2.0.0",
+    "node-polyfill-webpack-plugin": "^1.0.2",
+    "path-browserify": "^1.0.1",
+    "typescript": "^4.1.4",
+    "webpack": "^5.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.28",
+    "csv-parse": "^4.15.1",
+    "ts-loader": "^8.0.17",
+    "webpack-cli": "^4.5.0"
+  }
+}

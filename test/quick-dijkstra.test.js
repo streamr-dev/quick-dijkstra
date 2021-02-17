@@ -1,4 +1,4 @@
-const QuickDijkstra = require("../quickdijkstra.js");
+const QuickDijkstra = require("../src/js/quickdijkstra.js");
 const JsGraphDijkstra = require("./jsgraphdijkstra");
 const TestHelper = require("./testhelper");
 

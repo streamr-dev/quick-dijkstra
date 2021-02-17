@@ -1,0 +1,14 @@
+{
+  "name": "@streamr/quick-dijkstra-wasm",
+  "version": "1.1.0",
+  "description": "Dijkstra shortest path calculator implemented in C++ and comiled to wasm",
+  "main": "quickdijkstra-wasm.js",
+  "typings": "quickdijkstra-wasm.d.ts",
+  "scripts": { 
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "license": "MIT"
+}
