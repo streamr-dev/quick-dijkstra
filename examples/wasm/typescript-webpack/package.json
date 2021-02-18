@@ -2,7 +2,7 @@
   "name": "@streamr/quick-dijkstra-wasm-example",
   "version": "1.0.0",
   "description": "Example of using @streamr/quick-dijkstra-wasm in typescript",
-  "main": "example.ts",
+  "main": "www/example.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cp ./node_modules/@streamr/quick-dijkstra-wasm/dijkstraengine.wasm ./www && cp ./src/*.html ./www && cp ./src/*.json ./www && webpack",
@@ -12,10 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@streamr/quick-dijkstra-wasm": "latest",
-    "console-browserify": "^1.2.0",
     "exports-loader": "^2.0.0",
-    "node-polyfill-webpack-plugin": "^1.0.2",
-    "path-browserify": "^1.0.1",
     "typescript": "^4.1.4",
     "webpack": "^5.22.0"
   },

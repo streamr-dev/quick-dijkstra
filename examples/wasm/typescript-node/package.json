@@ -2,7 +2,7 @@
   "name": "quick-dijkstra-wasm-ts-example",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/example.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@streamr/quick-dijkstra-wasm": "latest",
+    "@streamr/quick-dijkstra-wasm": "^1.1.1",
     "typescript": "^4.1.5"
   }
 }

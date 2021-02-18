@@ -58,12 +58,14 @@ QuickDijkstraWasm.calculateShortestPaths = function(links, callback)
 	else if (typeof module !== 'undefined')
 		{
 		addon = require('./dijkstraengine.js');
+		doCalculateShortestPaths(addon, links, callback);
 		}
 
 	// script tag	
 	else
 		{
-		addon = window.module;	
+		addon = window.Module;	
+		doCalculateShortestPaths(addon, links, callback);
 		}	
 	};
 

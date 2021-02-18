@@ -1,6 +1,6 @@
 {
   "name": "quick-dijkstra",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Dijkstra Shortest Path Calculator implemented as a nodejs native module",
   "main": "quickdijkstra.js",
   "typings": "quickdijkstra.d.ts",
@@ -8,11 +8,11 @@
   "gypfile": true,
   "scripts": {
     "test": "jest --runInBand",
-    "speedtest": "node examples/native/speedtest.js",
+    "speedtest": "cd examples/native && node speedtest.js",
     "typedoc": "cd src/js && npx typedoc --out ../../doc/native --excludeExternals --externalPattern **/node_modules/**  --plugin typedoc-plugin-markdown ./quickdijkstra.d.ts",
     "wasm-typedoc": "cd src/wasmjs && npx typedoc --out ../../doc/wasm --excludeExternals --externalPattern **/node_modules/**  --plugin typedoc-plugin-markdown ./quickdijkstra-wasm.d.ts",
     "wasm-compile": "./wasm-compile.sh",
-    "wasm-speedtest": "node examples/wasm/javascript-node/wasmspeedtest.js"
+    "wasm-speedtest": "cd examples/wasm/javascript-node && node wasmspeedtest.js"
   },
   "dependencies": {
     "bindings": "~1.2.1",

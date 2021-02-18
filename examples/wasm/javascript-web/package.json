@@ -11,6 +11,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@streamr/quick-dijkstra-wasm": "latest"
+    "@streamr/quick-dijkstra-wasm": "^1.1.1"
   }
 }
