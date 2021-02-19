@@ -1,6 +1,6 @@
-[quick-dijkstra](README.md) / Exports
+[quick-dijkstra-wasm](README.md) / Exports
 
-# quick-dijkstra
+# quick-dijkstra-wasm
 
 ## Table of contents
 
