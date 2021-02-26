@@ -40,7 +40,7 @@ module.exports = {
 				test: /dijkstraengine\.wasm$/,
 				loader: "file-loader",
 				options: {
-				  publicPath: "dist/"
+				  publicPath: "build/"
 				}
 			  }
 			

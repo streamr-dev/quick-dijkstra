@@ -2,7 +2,7 @@
 
 quick-dijkstra implements the Dijkstra's algorithm as a native C++ library for NodeJS, and as a 
 WebAssembly library for the browsers. Speed tests indicate that the native NodeJS library is approximately 10x faster than the js-graph-algorithms Dijkstra implementation written in pure Javascript. The native NodeJS library is distributed as NPM package @streamr/quick-dijkstra, 
-and the WebAssembly version as @streamr/quick-dijkstra-webassembly. Both versions are build from the same codebase (https://github.com/streamr-dev/quick-dijkstra) 
+and the WebAssembly version as @streamr/quick-dijkstra-wasm. Both versions are build from the same codebase (https://github.com/streamr-dev/quick-dijkstra) 
 
 ## NodeJS native library
 
@@ -104,6 +104,82 @@ QuickDijkstraWasm.calculateShortestPaths([ [2,3,1], [0,2,3], [2,1,4] ], ret =>
 ```
 See the complete [example](examples/wasm/javascript-web) at examples/wasm/javascript-web
 
+### Usage in React project generated using create-react-app
+
+Installation
+
+```
+npm install @streamr/quick-dijkstra-wasm
+```
+
+A project created with create-react-app uses webpack under the hood, and the webpack config needs to be made editable
+in order to be able to use quick-dijkstra-wasm. This can be achieved with the react-app-rewired package.
+
+Install react-app-rewired and required webpack plugins:
+
+```
+npm i -D react-app-rewired
+npm i -D copy-webpack-plugin@6.2.1
+npm i -D write-file-webpack-plugin
+npm i -D exports-loader@1.1.1
+```
+
+The react-app-revired uses the file config-overrides.js in the root directory of the project for 
+modifying the webpack config. Create config-overrides.js in the root directory of the project with the following
+content:
+
+```
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
+
+module.exports = function override(config, env) {
+    if (!config.plugins) {
+        config.plugins = [];
+	}
+	config.module.rules[0] = { parser: { requireEnsure: true } };
+	console.log(config.module.rules);
+
+    config.plugins.push(new CopyWebpackPlugin({patterns: [{from: 'node_modules/\@streamr/quick-dijkstra-wasm/dijkstraengine.wasm', to: 'static/js'}]}));
+	config.plugins.push(new WriteFilePlugin());
+
+	config.module.rules.push(	{
+		test: /dijkstraengine\.js$/,
+		loader: "exports-loader",
+		options: {
+			exports: "Module",
+		}
+	});
+
+	config.module.rules.push( {
+		test: /dijkstraengine\.wasm$/,
+		loader: "file-loader",
+		options: {
+		  publicPath: "build/static/js"
+		}
+	});
+
+	config.output.futureEmitAssets=false;
+
+    return config;
+}
+```
+
+Edit package.json to use react-app-rewired instead of react-scripts or react-scripts-ts:
+
+```
+// package.json
+"scripts": {
+ -   "start":"react-scripts-ts start",
+ +   "start": "react-app-rewired start --scripts-version react-scripts-ts",
+ -   "build" "react-scripts-ts build",
+ +   "build": "react-app-rewired build --scripts-version react-scripts-ts",
+ -   "test": "react-scripts-ts test --env=jsdom",
+ +   "test": "react-app-rewired test --env=jsdom --scripts-version react-scripts-ts",
+     "eject": "react-scripts-ts eject"
+  }
+```
+
+See the complete [example](examples/wasm/typescript-react) at examples/wasm/typescript-react
 
 ### Complete Usage examples
 
@@ -112,7 +188,8 @@ The folder examples/wasm contains complete examples of using the WebAssembly lib
  * typescript-node is an example of using the WebAssembly library on NodeJS with TypeScript
  * javascript-web is an example of using the WebAssembly library imported using the script tag on web
  * typescript-webpack is an example of using the WebAssembly library in a TypeScript project with webpack
- 
+ * typescript-react is an example of using the WebAssembly library in a React TypeScript project generated using create-react-app
+
 The most complete example is the typescript-webpackit, as it includes an example of converting a network graph into the format 
 required by the library. Pay attention to the webpack.config.js file; custom rules are neede in order to use the
 WebAssembly library in a WebPack project. Also note that the .wasm file needs to be served by the web server from the same folder together with 

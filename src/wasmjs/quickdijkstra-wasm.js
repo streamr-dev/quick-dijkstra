@@ -57,7 +57,7 @@ QuickDijkstraWasm.calculateShortestPaths = function(links, callback)
 	// nodejs
 	else if (typeof module !== 'undefined')
 		{
-		addon = require('./dijkstraengine.js');
+		addon = eval("require")('./dijkstraengine.js');
 		doCalculateShortestPaths(addon, links, callback);
 		}
 
