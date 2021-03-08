@@ -18,7 +18,14 @@ xmlhttp.onreadystatechange = function()
 		
 		QuickDijkstraWasm.calculateShortestPaths( integerLinks, (result) => 
 			{
-			console.log(JSON.stringify(result));	
+			console.log("recursion1 result");
+			console.log(JSON.stringify(result));
+			console.log("tring to recurse again");
+			QuickDijkstraWasm.calculateShortestPaths( integerLinks, (result2) => 
+				{
+				console.log("recursion2 result");
+				console.log(JSON.stringify(result2));
+				});	
 			});	
     	}
 	};

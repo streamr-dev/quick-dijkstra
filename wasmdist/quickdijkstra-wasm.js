@@ -1,4 +1,6 @@
 function QuickDijkstraWasm() {}
+QuickDijkstraWasm.addon = null;	
+QuickDijkstraWasm.wasmReady = false;
 
 var getLongestShortestPath = function(calculator, pathHops)
 	{
@@ -42,102 +44,120 @@ var getLongestShortestPath = function(calculator, pathHops)
 
 QuickDijkstraWasm.calculateShortestPaths = function(links, callback)
 	{
-	var addon = null;	
-	
-	// webpack	
-	if (typeof require !== "undefined" && typeof require.ensure === "function")
+	if (!QuickDijkstraWasm.addon)
 		{
-		require.ensure(['./dijkstraengine.js'], function (require) 
-			{ 
-			addon = require('./dijkstraengine.js').Module;	
-			doCalculateShortestPaths(addon, links, callback); 	
-			});
-		}	
+		// webpack	
+		if (typeof require !== "undefined" && typeof require.ensure === "function")
+			{
+			require.ensure(['./dijkstraengine.js'], function (require) 
+				{ 
+				QuickDijkstraWasm.addon = require('./dijkstraengine.js').Module;	
+				doCalculateShortestPaths(QuickDijkstraWasm.addon, links, callback); 	
+				});
+			}	
 
-	// nodejs
-	else if (typeof module !== 'undefined')
-		{
-		addon = eval("require")('./dijkstraengine.js');
-		doCalculateShortestPaths(addon, links, callback);
+		// nodejs
+		else if (typeof module !== 'undefined')
+			{
+			QuickDijkstraWasm.addon = eval("require")('./dijkstraengine.js');
+			doCalculateShortestPaths(QuickDijkstraWasm.addon, links, callback);
+			}
+
+		// script tag	
+		else
+			{
+			QuickDijkstraWasm.addon = window.Module;	
+			doCalculateShortestPaths(QuickDijkstraWasm.addon, links, callback);
+			}	
 		}
-
-	// script tag	
 	else
 		{
-		addon = window.Module;	
-		doCalculateShortestPaths(addon, links, callback);
-		}	
+		doCalculateShortestPaths(QuickDijkstraWasm.addon, links, callback);	
+		}
+	};
+
+var runWasmCalculation = function(addon, links, callback)
+	{
+	var numNodes = 0;
+	var biggestNodeId = 0;
+	
+	for (let i=0; i < links.length; i++)
+		{
+		if (links[i][0] > biggestNodeId)
+			biggestNodeId = links[i][0];
+
+		if (links[i][1] > biggestNodeId)
+			biggestNodeId = links[i][1];		
+		}
+
+	numNodes = biggestNodeId + 1;
+
+	var calculator = new addon.DijkstraEngine();
+
+	calculator.init(numNodes);
+
+	for (let i = 0; i < links.length; i++)
+		{
+		if(	links[i][0]== links[i][1])
+	 		{
+			console.log("non-allowed self-loop: "+links[i][0]+ " "+ links[i][1]+" "+ links[i][2]);
+	 		process.exit(1);
+			}
+		calculator.addEdge(links[i][0], links[i][1], links[i][2]);
+		}
+
+	calculator.compute();
+	//console.log("compute called");
+	var ret = new Object();
+
+	let arr = new Array();
+	let pathHops = new Array();
+
+	for (let i = 0; i < numNodes; i++)
+		{
+		var temp = new Array();
+		var hopsTemp = new Array();
+		for (let j=0; j< numNodes; j++)
+			{
+			//console.log("numNodes: "+numNodes);
+			//console.log("QuickDijkstra::calculateShortestPaths() calling getDistance i: "+i+" j: "+j);
+			//console.log(calculator.getDistance(i, j));
+			temp.push(calculator.getDistance(i, j));
+			hopsTemp.push(calculator.getPathHops(i, j));
+			}
+		arr.push(temp);
+		pathHops.push(hopsTemp);
+		}
+
+	let maximumDistance = calculator.getMaximumDistance();
+	let averageDistance = calculator.getAverageDistance();
+	let maximumPathHops = calculator.getMaximumPathHops();
+
+	ret.distances = arr;
+	ret.pathHops = pathHops;
+	ret.maximumDistance = maximumDistance;
+	ret.averageDistance = averageDistance;
+	ret.maximumPathHops = maximumPathHops;
+	ret.longestShortestPath = getLongestShortestPath(calculator, pathHops);
+
+	calculator.delete();
+	callback(ret); 	
 	};
 
 var doCalculateShortestPaths = function(addon, links, callback)
 	{	
-	addon.addOnPostRun(() => 
+	if (!QuickDijkstraWasm.wasmReady)
 		{
-		var numNodes = 0;
-		var biggestNodeId = 0;
-	
-		for (let i=0; i < links.length; i++)
+		addon.addOnPostRun(() => 
 			{
-			if (links[i][0] > biggestNodeId)
-				biggestNodeId = links[i][0];
-
-			if (links[i][1] > biggestNodeId)
-				biggestNodeId = links[i][1];		
-			}
-
-		numNodes = biggestNodeId + 1;
-
-		var calculator = new addon.DijkstraEngine();
-
-		calculator.init(numNodes);
-
-		for (let i = 0; i < links.length; i++)
-			{
-			if(	links[i][0]== links[i][1])
-		 		{
-				console.log("non-allowed self-loop: "+links[i][0]+ " "+ links[i][1]+" "+ links[i][2]);
-		 		process.exit(1);
-				}
-			calculator.addEdge(links[i][0], links[i][1], links[i][2]);
-			}
-
-		calculator.compute();
-		//console.log("compute called");
-		var ret = new Object();
-
-		let arr = new Array();
-		let pathHops = new Array();
-
-		for (let i = 0; i < numNodes; i++)
-			{
-			var temp = new Array();
-			var hopsTemp = new Array();
-			for (let j=0; j< numNodes; j++)
-				{
-				//console.log("numNodes: "+numNodes);
-				//console.log("QuickDijkstra::calculateShortestPaths() calling getDistance i: "+i+" j: "+j);
-				//console.log(calculator.getDistance(i, j));
-				temp.push(calculator.getDistance(i, j));
-				hopsTemp.push(calculator.getPathHops(i, j));
-				}
-			arr.push(temp);
-			pathHops.push(hopsTemp);
-			}
-
-		let maximumDistance = calculator.getMaximumDistance();
-		let averageDistance = calculator.getAverageDistance();
-		let maximumPathHops = calculator.getMaximumPathHops();
-
-		ret.distances = arr;
-		ret.pathHops = pathHops;
-		ret.maximumDistance = maximumDistance;
-		ret.averageDistance = averageDistance;
-		ret.maximumPathHops = maximumPathHops;
-		ret.longestShortestPath = getLongestShortestPath(calculator, pathHops);
-
-		calculator.delete();
-		callback(ret); 
-		});
+			QuickDijkstraWasm.wasmReady = true;	
+			runWasmCalculation(addon, links, callback);
+			});
+		}
+	else
+		{
+		runWasmCalculation(addon, links, callback);	
+		}
 	};
 
 if (typeof module !== 'undefined')
