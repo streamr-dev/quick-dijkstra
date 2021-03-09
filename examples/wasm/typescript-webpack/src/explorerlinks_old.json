@@ -1,0 +1,14 @@
+{
+    "node-1": [
+             {"neighborId": "node-2", "rtt": 10},
+             {"neighborId": "node-3", "rtt": null}
+    ],
+    "node-2": [
+             {"neighborId": "node-1", "rtt": 10},
+             {"neighborId": "node-3", "rtt": 120}
+    ],
+    "node-3": [
+             {"neighborId": "node-1", "rtt": null},
+             {"neighborId": "node-2", "rtt": 120}
+    ]
+ }

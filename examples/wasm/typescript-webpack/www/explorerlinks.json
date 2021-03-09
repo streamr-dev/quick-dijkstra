@@ -1,14 +1,96 @@
 {
-    "node-1": [
-             {"neighborId": "node-2", "rtt": 10},
-             {"neighborId": "node-3", "rtt": null}
-    ],
-    "node-2": [
-             {"neighborId": "node-1", "rtt": 10},
-             {"neighborId": "node-3", "rtt": 120}
-    ],
-    "node-3": [
-             {"neighborId": "node-1", "rtt": null},
-             {"neighborId": "node-2", "rtt": 120}
-    ]
- }
+	"0xd83a62df026465cedc0c2299e87a6c87afb23691": [{
+		"neighborId": "0x4993b97cfa91c0be0761fde1e9726e9cbecd3d5a",
+		"rtt": 131
+	}],
+	"0x4993b97cfa91c0be0761fde1e9726e9cbecd3d5a": [{
+		"neighborId": "0xd83a62df026465cedc0c2299e87a6c87afb23691",
+		"rtt": 124
+	}, {
+		"neighborId": "0xf0f199b629a82401485d28cb941549f0d8a2410e",
+		"rtt": 34
+	}, {
+		"neighborId": "0x5a63be3a7ee07e9e2813f404d9e3174a9f56d42c",
+		"rtt": 100
+	}, {
+		"neighborId": "0x703bae242d1b68fd3a8f9aa10cd65df5b1b1f06d",
+		"rtt": 130
+	}],
+	"0x4c98d22645a81a6a3b9c8910d2f000ceb39aa5a1": [{
+		"neighborId": "0x4a085a95fc41ba213142827a4174ded2eae10ad6",
+		"rtt": 171
+	}],
+	"0x4a085a95fc41ba213142827a4174ded2eae10ad6": [{
+		"neighborId": "0x4c98d22645a81a6a3b9c8910d2f000ceb39aa5a1",
+		"rtt": 126
+	}, {
+		"neighborId": "0xb49816a7685907dca7b61052bedb53e17db285f5",
+		"rtt": 52
+	}, {
+		"neighborId": "0xf88522a953100844a1826d01b17e28349685449d",
+		"rtt": 1
+	}, {
+		"neighborId": "0x6ebabb84c121bd0497adaeaac65635bab128a4b9",
+		"rtt": 56
+	}, {
+		"neighborId": "0x5a63be3a7ee07e9e2813f404d9e3174a9f56d42c",
+		"rtt": 22
+	}],
+	"0xf0f199b629a82401485d28cb941549f0d8a2410e": [{
+		"neighborId": "0x703bae242d1b68fd3a8f9aa10cd65df5b1b1f06d",
+		"rtt": 105
+	}, {
+		"neighborId": "0x4993b97cfa91c0be0761fde1e9726e9cbecd3d5a",
+		"rtt": 144
+	}],
+	"0x703bae242d1b68fd3a8f9aa10cd65df5b1b1f06d": [{
+		"neighborId": "0xf0f199b629a82401485d28cb941549f0d8a2410e",
+		"rtt": 147
+	}, {
+		"neighborId": "0x5a63be3a7ee07e9e2813f404d9e3174a9f56d42c",
+		"rtt": 135
+	}, {
+		"neighborId": "0x4993b97cfa91c0be0761fde1e9726e9cbecd3d5a",
+		"rtt": 182
+	}],
+	"0xb49816a7685907dca7b61052bedb53e17db285f5": [{
+		"neighborId": "0x4a085a95fc41ba213142827a4174ded2eae10ad6",
+		"rtt": 132
+	}, {
+		"neighborId": "0x6ebabb84c121bd0497adaeaac65635bab128a4b9",
+		"rtt": 38
+	}],
+	"0xf88522a953100844a1826d01b17e28349685449d": [{
+		"neighborId": "0x6ebabb84c121bd0497adaeaac65635bab128a4b9",
+		"rtt": 173
+	}, {
+		"neighborId": "0x4a085a95fc41ba213142827a4174ded2eae10ad6",
+		"rtt": 139
+	}],
+	"0x6ebabb84c121bd0497adaeaac65635bab128a4b9": [{
+		"neighborId": "0xf88522a953100844a1826d01b17e28349685449d",
+		"rtt": 2
+	}, {
+		"neighborId": "0xb49816a7685907dca7b61052bedb53e17db285f5",
+		"rtt": 31
+	}, {
+		"neighborId": "0x5a63be3a7ee07e9e2813f404d9e3174a9f56d42c",
+		"rtt": 181
+	}, {
+		"neighborId": "0x4a085a95fc41ba213142827a4174ded2eae10ad6",
+		"rtt": 18
+	}],
+	"0x5a63be3a7ee07e9e2813f404d9e3174a9f56d42c": [{
+		"neighborId": "0x6ebabb84c121bd0497adaeaac65635bab128a4b9",
+		"rtt": 165
+	}, {
+		"neighborId": "0x4a085a95fc41ba213142827a4174ded2eae10ad6",
+		"rtt": 117
+	}, {
+		"neighborId": "0x703bae242d1b68fd3a8f9aa10cd65df5b1b1f06d",
+		"rtt": 45
+	}, {
+		"neighborId": "0x4993b97cfa91c0be0761fde1e9726e9cbecd3d5a",
+		"rtt": 60
+	}]
+}
