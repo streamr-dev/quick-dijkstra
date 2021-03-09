@@ -7,7 +7,7 @@ static convertLinksToIntegers(data: any): GraphLink[]
 	{
 	let ret: GraphLink[] = []; 	
 
-	let matrix:  Map<[from: number, to: number], number> = new Map<[from: number, to: number], number>(); 
+	let matrix:  Map<string, number> = new Map<string, number>(); 
 	// build a mapping from links with arbitrary node ids to links with integer ids,
 	// the integer id is based on the first occurence of the node in the data and
 	// convert links to integer format using the mapping created, 
@@ -38,11 +38,11 @@ static convertLinksToIntegers(data: any): GraphLink[]
 				
 				if (a < b)
 					{
-					matrix.set([a, b], Math.round(data[i][j]["rtt"]/2));	
+					matrix.set(JSON.stringify([a, b]), Math.round(data[i][j]["rtt"]/2));	
 					}
 				else
 					{
-					matrix.set([b, a], Math.round(data[i][j]["rtt"]/2));		
+					matrix.set(JSON.stringify([b, a]), Math.round(data[i][j]["rtt"]/2));		
 					}
 				//ret.push( [ nodeIds[i], nodeIds[data[i][j]["neighborId"]], data[i][j]["rtt"]]);
 				}
@@ -50,7 +50,8 @@ static convertLinksToIntegers(data: any): GraphLink[]
 		}
 	for (let [key, value] of  matrix.entries()) 
 		{
-		ret.push([key[0], key[1], value]);
+		let arr = JSON.parse(key);	
+		ret.push([arr[0], arr[1], value]);
 		}
 
 	return ret;
