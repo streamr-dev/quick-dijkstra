@@ -8,7 +8,7 @@
 #include <queue>
 
 using namespace std;
-# define INF 0x3f3f3f3f
+#define INF 0x3f3f3f3f
 
 // iPair ==> Integer Pair
 typedef pair<int, int> iPair;

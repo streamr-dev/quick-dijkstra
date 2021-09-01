@@ -8,11 +8,11 @@ var getLongestShortestPath = function(calculator, pathHops)
 	var maxI = -1;
 	var maxJ = -1;
 
-	for (var i=0; i<pathHops.length; i++)
+	for (var i=0; i < pathHops.length; i++)
 		{
-		for (var j=0; j<pathHops[i].length; j++)
+		for (var j = 0; j < pathHops[i].length; j++)
 			{
-			if (pathHops[i][j]>max)
+			if (pathHops[i][j] < Infinity && pathHops[i][j] > max)
 				{
 				max = pathHops[i][j];
 				maxI = i;
@@ -122,8 +122,20 @@ var runWasmCalculation = function(addon, links, callback)
 			//console.log("numNodes: "+numNodes);
 			//console.log("QuickDijkstra::calculateShortestPaths() calling getDistance i: "+i+" j: "+j);
 			//console.log(calculator.getDistance(i, j));
-			temp.push(calculator.getDistance(i, j));
-			hopsTemp.push(calculator.getPathHops(i, j));
+			let dist = calculator.getDistance(i, j);
+			
+			if (dist >= INF)
+				dist = Infinity;
+
+			temp.push(dist);
+
+
+			let hops = calculator.getPathHops(i, j);
+
+			if (hops >= INF)
+				hops = Infinity;
+
+			hopsTemp.push(hops);
 			}
 		arr.push(temp);
 		pathHops.push(hopsTemp);

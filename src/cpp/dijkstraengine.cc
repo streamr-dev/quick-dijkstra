@@ -174,6 +174,9 @@ int DijkstraEngine::getPathHops(int from, int to)
 		pointer = getParent(from, pointer);
 		}
 
+	if (pointer == -1)
+		return INF;
+
 	return ret;
 	}
 
@@ -187,7 +190,7 @@ int DijkstraEngine::getMaximumDistance()
 			{
 			int val = getDistance(i, j);
 				
-			if (val > max)
+			if (val < INF && val > max)
 				max = val;
 			}
 		}
@@ -203,8 +206,12 @@ double DijkstraEngine::getAverageDistance()
 		{
 		for (int j=0; j<v; j++)
 			{
-			sum += getDistance(i, j);
-			count++;
+			int dist = getDistance(i, j);
+			if (dist < INF)
+				{
+				sum += dist;
+				count++;
+				}
 			}
 		}
 
@@ -221,7 +228,7 @@ int DijkstraEngine::getMaximumPathHops()
 			{
 			int val = getPathHops(i, j);
 			
-			if (val > max)
+			if (val < INF && val > max)
 				max = val;
 			}
 		}

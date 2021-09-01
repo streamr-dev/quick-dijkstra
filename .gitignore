@@ -1,3 +1,4 @@
 **/node_modules
 build
 examples/wasm/typescript-react/dist/
+**/.DS_Store

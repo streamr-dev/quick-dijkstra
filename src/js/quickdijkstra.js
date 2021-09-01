@@ -1,5 +1,7 @@
 function QuickDijkstra() {}
 
+var INF = 0x3f3f3f3f;
+
 var getLongestShortestPath = function(calculator, pathHops)
 	{
 	var max = 0;
@@ -8,9 +10,9 @@ var getLongestShortestPath = function(calculator, pathHops)
 
 	for (var i=0; i<pathHops.length; i++)
 		{
-		for (var j=0; j<pathHops[i].length; j++)
+		for (var j=0; j < pathHops[i].length; j++)
 			{
-			if (pathHops[i][j]>max)
+			if (pathHops[i][j] < Infinity && pathHops[i][j] > max)
 				{
 				max = pathHops[i][j];
 				maxI = i;
@@ -88,8 +90,18 @@ QuickDijkstra.calculateShortestPaths = function(links)
 			{
 			//console.log("numNodes: "+numNodes);
 			//console.log("QuickDijkstra::calculateShortestPaths() calling getDistance i: "+i+" j: "+j);
-			temp.push(calculator.getDistance(i, j));
-			hopsTemp.push(calculator.getPathHops(i, j));
+			let dist = calculator.getDistance(i, j);
+			
+			if (dist >= INF)
+				dist = Infinity;
+
+			temp.push(dist);
+			let hops = calculator.getPathHops(i, j);
+
+			if (hops >= INF)
+				hops = Infinity;
+
+			hopsTemp.push(hops);
 			}
 		arr.push(temp);
 		pathHops.push(hopsTemp);

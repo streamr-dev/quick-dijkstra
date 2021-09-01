@@ -44,6 +44,11 @@ test('checks if results of JsGraph and QuickDijkstra are equal for the 512 nodes
 	expect(TestHelper.areResultsEqual(jsGraphResult,quickDijkstraResult)).toBeTruthy();
 });
 
+test('calculates shortest paths in a topology with disjoint nodes', () => {
+	let quickDijkstraResulDisjoint = QuickDijkstra.calculateShortestPaths([ [0,1,1], [1,2,1], [2,3,1], [4,5,1], [5,6,1] ]);
+	console.log(beautify(quickDijkstraResulDisjoint));
+});
+
 
 
 
