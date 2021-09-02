@@ -2,6 +2,8 @@ function QuickDijkstraWasm() {}
 QuickDijkstraWasm.addon = null;	
 QuickDijkstraWasm.wasmReady = false;
 
+var INF = 0x3f3f3f3f;
+
 var getLongestShortestPath = function(calculator, pathHops)
 	{
 	var max = 0;
