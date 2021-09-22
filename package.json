@@ -1,6 +1,6 @@
 {
   "name": "quick-dijkstra",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Dijkstra Shortest Path Calculator implemented as a nodejs native module",
   "main": "quickdijkstra.js",
   "typings": "quickdijkstra.d.ts",
