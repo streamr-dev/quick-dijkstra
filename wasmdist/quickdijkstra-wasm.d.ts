@@ -35,10 +35,14 @@ declare module '@streamr/quick-dijkstra-wasm' {
 	
 	};
 
-
 	/** Calculates all the shortest paths in a integer-weighted graph.  
 	 * Takes as its argument an array of GraphLink 
 	*/
 	export function calculateShortestPaths(links: Array<GraphLink>, callback: (result: QuickDijkstraResult) => void): void;	
+
+	/** Calculates the shortest paths from node i in a integer-weighted graph.  
+	 * Takes as its argument an array of GraphLink 
+	*/
+	export function calculateShortestPathsFromNode(links: Array<GraphLink>, nodeId: number, callback: (result: QuickDijkstraResult) => void): void;	
 
 }

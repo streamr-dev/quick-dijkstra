@@ -1,6 +1,6 @@
-[quick-dijkstra-wasm](README.md) / Exports
+[quick-dijkstra](README.md) / Exports
 
-# quick-dijkstra-wasm
+# quick-dijkstra
 
 ## Table of contents
 
@@ -12,6 +12,7 @@
 ### Functions
 
 - [calculateShortestPaths](modules.md#calculateshortestpaths)
+- [calculateShortestPathsFromNode](modules.md#calculateshortestpathsfromnode)
 
 ## Type aliases
 
@@ -24,7 +25,7 @@
  need to be sequential integers [0, 1, 2, ..., N] as the nodeIds are used directly
  as array indices in the C++ algorithms
 
-Defined in: quickdijkstra-wasm.d.ts:9
+Defined in: [quickdijkstra-wasm.d.ts:9](https://github.com/streamr-dev/quick-dijkstra/blob/d49efcf/src/wasmjs/quickdijkstra-wasm.d.ts#L9)
 
 ___
 
@@ -43,7 +44,7 @@ Name | Type | Description |
 `maximumPathHops` | *number* | Maximum number of hops between a pair of nodes on the fastest paths in the graph   |
 `pathHops` | *number*[][] | The matrix containing the number of hops from each node to every other node in the graph on the fastest paths. For example, pathHops[3][7] is the number of hops from node 3 to node 7 on the fastest path in the graph. As the graphs are treated as undirected, the condition pathHops[x][y] === pathHops[y][x] always holds.   |
 
-Defined in: quickdijkstra-wasm.d.ts:11
+Defined in: [quickdijkstra-wasm.d.ts:11](https://github.com/streamr-dev/quick-dijkstra/blob/d49efcf/src/wasmjs/quickdijkstra-wasm.d.ts#L11)
 
 ## Functions
 
@@ -63,4 +64,25 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: quickdijkstra-wasm.d.ts:42
+Defined in: [quickdijkstra-wasm.d.ts:41](https://github.com/streamr-dev/quick-dijkstra/blob/d49efcf/src/wasmjs/quickdijkstra-wasm.d.ts#L41)
+
+___
+
+### calculateShortestPathsFromNode
+
+▸ **calculateShortestPathsFromNode**(`links`: [*GraphLink*](modules.md#graphlink)[], `nodeId`: *number*, `callback`: (`result`: [*QuickDijkstraResult*](modules.md#quickdijkstraresult)) => *void*): *void*
+
+Calculates the shortest paths from node i in a integer-weighted graph.
+Takes as its argument an array of GraphLink
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`links` | [*GraphLink*](modules.md#graphlink)[] |
+`nodeId` | *number* |
+`callback` | (`result`: [*QuickDijkstraResult*](modules.md#quickdijkstraresult)) => *void* |
+
+**Returns:** *void*
+
+Defined in: [quickdijkstra-wasm.d.ts:46](https://github.com/streamr-dev/quick-dijkstra/blob/d49efcf/src/wasmjs/quickdijkstra-wasm.d.ts#L46)

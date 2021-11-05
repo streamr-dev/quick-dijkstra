@@ -125,11 +125,16 @@ void DijkstraEngine::compute()
 	//printf("DijkstraEngine::compute() at end");	
 	}
 
+void DijkstraEngine::computeDistancesFromNode(int i)
+	{
+	shortestPath(i);	
+	}
+
 int DijkstraEngine::getDistance(int from, int to)
 	{
 	//printf("DijkstraEngine::getDistance() from: %d to: %d\n", from, to);	
 	int temp = results[from][to];
-	//printf("DijkstraEngine::getDistance() from: %d to: %d dist: %d\n", from, to, temp);	
+	//printf("DijkstraEngine::getDistance() result, from: %d to: %d dist: %d\n", from, to, temp);	
 	return temp;
 	}
 
@@ -186,6 +191,9 @@ int DijkstraEngine::getMaximumDistance()
 			
 	for (int i=0; i<v; i++)
 		{
+		if (results[i].size() < v)
+			continue;
+
 		for (int j=0; j<v; j++)
 			{
 			int val = getDistance(i, j);
@@ -204,6 +212,9 @@ double DijkstraEngine::getAverageDistance()
 			
 	for (int i=0; i<v; i++)
 		{
+		if (results[i].size() < v)
+			continue;
+
 		for (int j=0; j<v; j++)
 			{
 			int dist = getDistance(i, j);
@@ -224,6 +235,9 @@ int DijkstraEngine::getMaximumPathHops()
 		
 	for (int i=0; i<v; i++)
 		{
+		if (results[i].size() < v)
+			continue;
+
 		for (int j=0; j<v; j++)
 			{
 			int val = getPathHops(i, j);
@@ -247,6 +261,7 @@ EMSCRIPTEN_BINDINGS (c) {
     .function("init", &DijkstraEngine::init)
     .function("addEdge", &DijkstraEngine::addEdge)
 	.function("compute", &DijkstraEngine::compute)
+	.function("computeDistancesFromNode", &DijkstraEngine::computeDistancesFromNode)
 	.function("getDistance", &DijkstraEngine::getDistance)
  	.function("getParent", &DijkstraEngine::getParent)
 	.function("getPath", &DijkstraEngine::getPath)

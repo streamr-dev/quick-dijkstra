@@ -29,6 +29,7 @@ private:
   	Napi::Value init(const Napi::CallbackInfo& info);  
   	Napi::Value addEdge(const Napi::CallbackInfo& info);
 	Napi::Value compute(const Napi::CallbackInfo& info);  
+	Napi::Value computeDistancesFromNode(const Napi::CallbackInfo& info);
 	Napi::Value getDistance(const Napi::CallbackInfo& info);
 	Napi::Value getParent(const Napi::CallbackInfo& info);
 	Napi::Value getPathHops(const Napi::CallbackInfo& info);

@@ -40,5 +40,10 @@ declare module 'quick-dijkstra' {
 	 * Takes as its argument an array of GraphLink 
 	*/
 	export function calculateShortestPaths(links: Array<GraphLink>): QuickDijkstraResult;	
+	
+	/** Calculates the shortest paths from node i in a integer-weighted graph.  
+	 * Takes as its argument an array of GraphLink 
+	*/
+	export function calculateShortestPathsFromNode(links: Array<GraphLink>, nodeId: number): QuickDijkstraResult;
 
 }

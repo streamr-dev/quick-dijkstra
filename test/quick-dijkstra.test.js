@@ -49,7 +49,11 @@ test('calculates shortest paths in a topology with disjoint nodes', () => {
 	console.log(beautify(quickDijkstraResulDisjoint));
 });
 
-
+test('calculates shortest paths from node 10 in topology of 512 nodes', () => {
+	let data = TestHelper.loadTopology("./test/512topology.json");
+	quickDijkstraResult = QuickDijkstra.calculateShortestPathsFromNode(data, 10);
+	console.log(beautify(quickDijkstraResult));
+});
 
 
 

@@ -43,6 +43,7 @@ public:
 	void init(int numberOfVertices);
 	void addEdge(int u, int v, int wt);
 	void compute();
+	void computeDistancesFromNode(int i);
 	int getDistance(int from, int to);
 	int getParent(int src, int vertex);
 	vector<int> getPath(int from, int to);
