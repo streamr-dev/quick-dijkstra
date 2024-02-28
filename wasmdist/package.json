@@ -1,7 +1,14 @@
 {
   "name": "@streamr/quick-dijkstra-wasm",
-  "version": "1.2.3",
-  "description": "Dijkstra shortest path calculator implemented in C++ and comiled to wasm",
+  "version": "1.2.4",
+  "description": "Dijkstra shortest path algorithm implemented in C++ and comiled to wasm",
+  "keywords": [
+    "dijkstra", 
+    "webassembly",
+    "c++",
+    "typescript",
+    "native"
+  ],
   "main": "quickdijkstra-wasm.js",
   "typings": "quickdijkstra-wasm.d.ts",
   "scripts": { 

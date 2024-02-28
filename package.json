@@ -1,7 +1,14 @@
 {
   "name": "@streamr/quick-dijkstra",
-  "version": "1.2.3",
-  "description": "Dijkstra Shortest Path Calculator implemented as a nodejs native module",
+  "version": "1.2.4",
+  "description": "Dijkstra Shortest Path Algorithm implemented as a nodejs native module",
+  "keywords": [
+    "dijkstra", 
+    "native",
+    "c++",
+    "typescript",
+    "webassembly"
+  ],
   "main": "src/js/quickdijkstra.js",
   "typings": "src/js/quickdijkstra.d.ts",
   "private": false,
