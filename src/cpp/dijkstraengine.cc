@@ -108,7 +108,7 @@ void DijkstraEngine::shortestPath(int source)
 			}	
     	}
 
-    for (int i = 0; i < v; ++i)
+    for (unsigned int i = 0; i < v; ++i)
 		{
 		results[source].push_back(min_distance[i]);
 		parentResults[source].push_back(parent[i]);
@@ -118,7 +118,7 @@ void DijkstraEngine::shortestPath(int source)
 
 void DijkstraEngine::compute()
 	{
-	for (int i=0; i < v; i++)
+	for (unsigned int i=0; i < v; i++)
 		{
 		shortestPath(i);
 		}
@@ -189,12 +189,12 @@ int DijkstraEngine::getMaximumDistance()
 	{
 	int max = 0;
 			
-	for (int i=0; i<v; i++)
+	for (unsigned int i=0; i<v; i++)
 		{
 		if (results[i].size() < v)
 			continue;
 
-		for (int j=0; j<v; j++)
+		for (unsigned int j=0; j<v; j++)
 			{
 			int val = getDistance(i, j);
 				
@@ -210,12 +210,12 @@ double DijkstraEngine::getAverageDistance()
 	double sum = 0;
 	int count = 0;
 			
-	for (int i=0; i<v; i++)
+	for (unsigned int i=0; i<v; i++)
 		{
 		if (results[i].size() < v)
 			continue;
 
-		for (int j=0; j<v; j++)
+		for (unsigned int j=0; j<v; j++)
 			{
 			int dist = getDistance(i, j);
 			if (dist < INF)
@@ -233,12 +233,12 @@ int DijkstraEngine::getMaximumPathHops()
 	{
 	int max = 0;
 		
-	for (int i=0; i<v; i++)
+	for (unsigned int i=0; i<v; i++)
 		{
 		if (results[i].size() < v)
 			continue;
 
-		for (int j=0; j<v; j++)
+		for (unsigned int j=0; j<v; j++)
 			{
 			int val = getPathHops(i, j);
 			

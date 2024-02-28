@@ -1,10 +1,10 @@
 {
-  "name": "quick-dijkstra",
-  "version": "1.2.0",
+  "name": "@streamr/quick-dijkstra",
+  "version": "1.2.3",
   "description": "Dijkstra Shortest Path Calculator implemented as a nodejs native module",
-  "main": "quickdijkstra.js",
-  "typings": "quickdijkstra.d.ts",
-  "private": true,
+  "main": "src/js/quickdijkstra.js",
+  "typings": "src/js/quickdijkstra.d.ts",
+  "private": false,
   "gypfile": true,
   "scripts": {
     "test": "jest --runInBand",
@@ -15,6 +15,7 @@
     "wasm-speedtest": "cd examples/wasm/javascript-node && node wasmspeedtest.js"
   },
   "dependencies": {
+    "@streamr/quick-dijkstra-wasm": "file:wasmdist",
     "bindings": "~1.2.1",
     "json-beautify": "^1.1.1",
     "node-addon-api": "^1.0.0"
@@ -23,9 +24,10 @@
     "babel-jest": "^26.6.3",
     "jest": "^26.6.0",
     "js-graph-algorithms": "^1.0.18",
-    "jsdoc-to-markdown": "^5.0.3",
-    "typedoc": "^0.20.19",
+    "jsdoc-to-markdown": "^8.0.1",
+    "typedoc": "^0.25.9",
     "typedoc-plugin-markdown": "^3.4.5",
     "typescript": "^4.1.3"
-  }
+  },
+  "license": "AGPL"
 }

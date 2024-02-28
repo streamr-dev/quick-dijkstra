@@ -29,7 +29,7 @@ struct Edge
 class DijkstraEngine
 {
 private:
-	int v = 0;
+	unsigned int v = 0;
 	vector<vector<int> > results;
 	vector<vector<int> > parentResults;
 	
